@@ -16,6 +16,9 @@ public class PlayerMovementScript : MonoBehaviour
     //offset: to give some space between the player and magnet, so the player doesnt "ram" into the magnet/wall
     public Vector3 lastWall, offset;
 
+
+    public float distance, speed;
+
     //the players rigigbody
     public Rigidbody2D rb;
 
@@ -59,6 +62,9 @@ public class PlayerMovementScript : MonoBehaviour
 
             }
 
+            //distance = Mathf.Abs(transform.position.x - magnet.GetComponent<Transform>().position.x);
+
+         
         }
 
         //if follow is true
@@ -72,8 +78,19 @@ public class PlayerMovementScript : MonoBehaviour
     //allows the player to follow the magnet
     public void FollowMagnet()
     {
+        if (lastWall.x < transform.position.x)
+        {
+
+            if(lastWall.y > transform.position.y)
+            {
+                offset.y = -1;
+                offset.x = 0;
+            }
+           
+        }
+       
 
         //move the player towards the magnet, while keeping a distance, at the speed of 1
-        transform.position = Vector3.MoveTowards(transform.position, lastWall - offset, 1);
+        transform.position = Vector3.MoveTowards(transform.position, lastWall - offset, speed);
     }
 }

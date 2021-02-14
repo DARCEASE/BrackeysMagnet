@@ -32,6 +32,8 @@ public class MagnetScript : MonoBehaviour
         //sets the magnet's x,y,z to the mypos variable
         mypos = GetComponent<Transform>().position;
 
+       
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -41,6 +43,16 @@ public class MagnetScript : MonoBehaviour
         {
             //tell the player to follow me
             player.follow = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //if i get off the object called wall
+        if (collision.gameObject.name == "wall")
+        {
+            //the player cannot follow me anymore
+            player.follow = false;
         }
     }
 }
