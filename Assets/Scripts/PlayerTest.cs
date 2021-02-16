@@ -8,11 +8,12 @@ public class PlayerTest : MonoBehaviour
 {
     public Vector3 moveLeft;
     public Vector3 moveUp;
+    public GameObject youWinPanel;
    
     // Start is called before the first frame update
     void Start()
     {
-        
+        youWinPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,6 +34,15 @@ public class PlayerTest : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(-moveLeft);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Captive")
+        {
+            Debug.Log("YEAAAAAAAAAAAA");
+            youWinPanel.SetActive(true); // open winning Panel that plays animation of the magnet boi and thier pal
+           
         }
     }
 }
