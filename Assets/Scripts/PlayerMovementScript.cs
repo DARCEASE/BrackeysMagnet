@@ -80,15 +80,51 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (lastWall.x < transform.position.x)
         {
+            offset.y = 0;
+            offset.x = -1;
+        }
 
-            if(lastWall.y > transform.position.y)
+        else if (lastWall.x > transform.position.x)
+        {
+            offset.y = 0;
+            offset.x = 1;
+        }
+
+        if (lastWall.y > transform.position.y)
+        {
+            offset.y = 1;
+            offset.x = 0;
+
+            if (lastWall.x < transform.position.x)
+            {
+                offset.y = 1;
+                offset.x = -1;
+            }
+
+            else if (lastWall.x > transform.position.x)
+            {
+                offset.y = 1;
+                offset.x = 1;
+            }
+        }
+        else if (lastWall.y < transform.position.y)
+        {
+            offset.y = -1;
+            offset.x = 0;
+
+            if (lastWall.x < transform.position.x)
             {
                 offset.y = -1;
-                offset.x = 0;
+                offset.x = -1;
             }
-           
+
+            else if (lastWall.x > transform.position.x)
+            {
+                offset.y = -1;
+                offset.x = 1;
+            }
         }
-       
+
 
         //move the player towards the magnet, while keeping a distance, at the speed of 1
         transform.position = Vector3.MoveTowards(transform.position, lastWall - offset, speed);
