@@ -32,6 +32,13 @@ public class ButtonManager : MonoBehaviour
     {
         optionsPanel.SetActive(false);
     }
+    public void PauseToMain()//from the pause menu head back to the start screen
+    {
+        Time.timeScale = 1f;
+        optionsPanel.SetActive(false);
+        SceneManager.LoadScene("TitleScene");
+
+    }
     public void LevelTwo()
     {
         SceneManager.LoadScene("LevelTwo");
