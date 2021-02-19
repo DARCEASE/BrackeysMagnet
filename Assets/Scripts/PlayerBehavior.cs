@@ -124,11 +124,15 @@ public class PlayerBehavior : MonoBehaviour
                   }
               }
           }
+          else
+        {
+            canmove = false;
+        }
 
-          if (canmove)
+         /* if (canmove)
           {
               Move();
-          }
+          }*/
       }
 
       private void Move()
@@ -137,7 +141,7 @@ public class PlayerBehavior : MonoBehaviour
 
       }
     
-        private void OnCollisionEnter2D(Collision2D collision)
+  /*      private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "wall")
         {
@@ -146,6 +150,6 @@ public class PlayerBehavior : MonoBehaviour
             canmove = false;
             canclick = true;
         }
-    }
+    }*/
 
 }
