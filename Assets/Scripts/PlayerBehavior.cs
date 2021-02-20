@@ -9,19 +9,37 @@ public class PlayerBehavior : MonoBehaviour
     
     public Vector3 rt, lt, dwn, u;
 
-    public int range, direction;
-
-    public bool canmove, canclick;
-    public Vector3 move;
+    public int direction;
+    public float range;
+    public bool canmove, canclick, isbouncing = false;
+    public Vector2 move;
 
     public Collider2D col;
     public LayerMask wall;
+
+    public Rigidbody2D rb;
+    public Vector2 dr;
+    public float speed;
+
+    public GameObject magnet;
+
     // Start is called before the first frame update
     void Start()
     {
         //rayCastHold = GetComponentInChildren<RaycastBehavior>().gameObject; 
         col = GetComponent<CircleCollider2D>();
         canclick = true;
+        rb = GetComponent<Rigidbody2D>();
+        float rads = 0;
+        while (rads == 0)
+        {
+            rads = Random.Range(0, 2 * Mathf.PI);
+        }
+
+        dr = new Vector2(Mathf.Cos(rads), Mathf.Sin(rads));
+        dr.Normalize();
+        dr *= speed;
+        rb.AddForce(dr);
     }
 
     // Update is called once per frame
@@ -41,7 +59,7 @@ public class PlayerBehavior : MonoBehaviour
           RaycastHit2D up = Physics2D.Linecast(transform.position, u, wall);
           RaycastHit2D down = Physics2D.Linecast(transform.position, dwn, wall);
 
-
+        
           Debug.DrawLine(transform.position, rt, Color.red);
           Debug.DrawLine(transform.position, lt, Color.green);
           Debug.DrawLine(transform.position, u, Color.blue);
@@ -57,17 +75,20 @@ public class PlayerBehavior : MonoBehaviour
                   //move until u hit a wall
                   if (canclick)
                   {
-                      move.x = .07f;
+                      move.x = .05f;
                       move.y = 0;
 
                       canmove = !canmove;
                       canclick = false;
                   }
 
+                
               }
+
           }
 
-          if (left.collider == null)
+
+        if (left.collider == null)
           {
               //Debug.Log("em");
               //there's empty space, so you can move
@@ -77,17 +98,19 @@ public class PlayerBehavior : MonoBehaviour
 
                   if (canclick)
                   {
-                      move.x = -.07f;
+                      move.x = -.05f;
                       move.y = 0;
 
                       canmove = !canmove;
                       canclick = false;
                   }
               }
+
           }
+        
 
 
-          if (up.collider == null)
+        if (up.collider == null)
           {
               //Debug.Log("em");
               //there's empty space, so you can move
@@ -98,15 +121,20 @@ public class PlayerBehavior : MonoBehaviour
                   if (canclick)
                   {
                       move.x = 0;
-                      move.y = .07f;
+                      move.y = .05f;
 
-                      canmove = !canmove;
+                      //canmove = !canmove;
                       canclick = false;
                   }
               }
-          }
 
-          if (down.collider == null)
+
+            
+            Instantiate(magnet, transform.position, Quaternion.identity);
+        }
+
+
+        if (down.collider == null)
           {
               //Debug.Log("em");
               //there's empty space, so you can move
@@ -117,27 +145,34 @@ public class PlayerBehavior : MonoBehaviour
                   if (canclick)
                   {
                       move.x = 0;
-                      move.y = -.07f;
+                      move.y = -.05f;
 
                       canmove = !canmove;
                       canclick = false;
                   }
               }
           }
+       
 
-          if (canmove)
+
+        if (canmove)
           {
               Move();
           }
+
+        /*if(!isbouncing)
+        {
+            rb.MovePosition(rb.position + move * speed * Time.deltaTime);
+        }*/
       }
 
-      private void Move()
+     public void Move()
       {
-          transform.Translate(move);
+        transform.Translate(move);
 
       }
     
-        private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "wall")
         {
@@ -145,7 +180,18 @@ public class PlayerBehavior : MonoBehaviour
             //rayCastHold.SetActive(true);
             canmove = false;
             canclick = true;
+
+            float bounce = 20f;
+            rb.AddForce(collision.contacts[0].normal * bounce);
+            isbouncing = true;
+            Invoke("StopBounce", 0.3f);
         }
+    }
+
+    void StopBounce()
+    {
+        isbouncing = false;
+        rb.velocity = new Vector3(0, 0, 0);
     }
 
 }
