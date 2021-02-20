@@ -2982,6 +2982,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1757660448259750863, guid: 2e36121cfea120444b2ec10a07d5a663,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4621927182248008142, guid: 2e36121cfea120444b2ec10a07d5a663,
         type: 3}
       propertyPath: range
@@ -3003,6 +3008,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8598160202174245613, guid: 40f2cc62a808e2d4f993046d78c7476d,
         type: 3}
+    - target: {fileID: 4621927182248008142, guid: 2e36121cfea120444b2ec10a07d5a663,
+        type: 3}
+      propertyPath: movespeed
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 8824359718838857289, guid: 2e36121cfea120444b2ec10a07d5a663,
         type: 3}
       propertyPath: m_Material

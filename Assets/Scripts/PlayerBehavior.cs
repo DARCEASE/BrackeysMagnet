@@ -7,25 +7,30 @@ public class PlayerBehavior : MonoBehaviour
     //public Transform lineStart, lineEnd;
    // public GameObject rayCastHold; //child GO W/ raycast script
     
-    public Vector3 rt, lt, dwn, u;
+    private Vector3 rt, lt, dwn, u;
 
     public int direction;
     public float range;
     public bool canmove, canclick, isbouncing = false;
     public Vector2 move;
+    public float movespeed;
 
-    public Collider2D col;
+    private Collider2D col;
     public LayerMask wall;
 
-    public Rigidbody2D rb;
-    public Vector2 dr;
-    public float speed;
+    private Rigidbody2D rb;
+    private Vector2 dr;
+    private float speed;
 
     public GameObject magnet;
+    private int magnetcount;
 
+    public MagnetScript magnetSc;
     // Start is called before the first frame update
     void Start()
     {
+
+        
         //rayCastHold = GetComponentInChildren<RaycastBehavior>().gameObject; 
         col = GetComponent<CircleCollider2D>();
         canclick = true;
@@ -40,6 +45,8 @@ public class PlayerBehavior : MonoBehaviour
         dr.Normalize();
         dr *= speed;
         rb.AddForce(dr);
+
+        magnetcount = 0;
     }
 
     // Update is called once per frame
@@ -49,6 +56,11 @@ public class PlayerBehavior : MonoBehaviour
         //{
          //   rayCastHold.SetActive(false);
         //}
+        if(magnet != null)
+        {
+            magnetSc = magnet.GetComponent<MagnetScript>();
+        }
+
           rt = new Vector3(transform.position.x + range, transform.position.y, 0);
           lt = new Vector3(transform.position.x - range, transform.position.y, 0);
           dwn = new Vector3(transform.position.x, transform.position.y - range, 0);
@@ -71,16 +83,26 @@ public class PlayerBehavior : MonoBehaviour
               //there's empty space, so you can move
               if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
               {
-                  Debug.Log("Right is Open. pretend i moved");
+                  //Debug.Log("Right is Open. pretend i moved");
                   //move until u hit a wall
                   if (canclick)
                   {
                       move.x = .05f;
                       move.y = 0;
 
-                      canmove = !canmove;
-                      canclick = false;
-                  }
+
+                    // canmove = !canmove;
+
+                    magnetSc.ChangeMovement();
+                    if (magnetcount < 1)
+                    {
+                     
+                        Instantiate(magnet, transform.position, Quaternion.identity);
+                        magnetcount++;
+                    }
+                    
+                    canclick = false;
+                }
 
                 
               }
@@ -94,16 +116,30 @@ public class PlayerBehavior : MonoBehaviour
               //there's empty space, so you can move
               if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
               {
-                  Debug.Log("Left is Open. pretend i moved");
+                  //Debug.Log("Left is Open. pretend i moved");
 
                   if (canclick)
                   {
                       move.x = -.05f;
                       move.y = 0;
 
-                      canmove = !canmove;
-                      canclick = false;
-                  }
+                     // canmove = !canmove;
+                      
+
+                    if (magnetcount < 1)
+                    {
+                        magnetSc.move.x = move.x;
+                        magnetSc.move.y = move.y;
+                        Instantiate(magnet, transform.position, Quaternion.identity);
+                        magnetcount++;
+                    }
+                    else
+                    {
+                        magnetSc.move.x = move.x;
+                        magnetSc.move.y = move.y;
+                    }
+                    canclick = false;
+                }
               }
 
           }
@@ -116,7 +152,7 @@ public class PlayerBehavior : MonoBehaviour
               //there's empty space, so you can move
               if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
               {
-                  Debug.Log("Up is Open. pretend i moved");
+                  //Debug.Log("Up is Open. pretend i moved");
                   //move until u hit a wall
                   if (canclick)
                   {
@@ -124,13 +160,27 @@ public class PlayerBehavior : MonoBehaviour
                       move.y = .05f;
 
                       //canmove = !canmove;
-                      canclick = false;
-                  }
+                     
+
+                    if (magnetcount < 1)
+                    {
+                        magnetSc.move.x = move.x;
+                        magnetSc.move.y = move.y;
+                        Instantiate(magnet, transform.position, Quaternion.identity);
+                        magnetcount++;
+                    }
+                    else
+                    {
+                        magnetSc.move.x = move.x;
+                        magnetSc.move.y = move.y;
+                    }
+
+                    canclick = false;
+                }
               }
 
 
-            
-            Instantiate(magnet, transform.position, Quaternion.identity);
+           
         }
 
 
@@ -140,16 +190,31 @@ public class PlayerBehavior : MonoBehaviour
               //there's empty space, so you can move
               if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
               {
-                  Debug.Log("Down is Open. pretend i moved");
+                  //Debug.Log("Down is Open. pretend i moved");
                   //move until u hit a wall
                   if (canclick)
                   {
                       move.x = 0;
                       move.y = -.05f;
 
-                      canmove = !canmove;
-                      canclick = false;
-                  }
+                      //canmove = !canmove;
+                     
+
+                    if (magnetcount < 1)
+                    {
+                        magnetSc.move.x = move.x;
+                        magnetSc.move.y = move.y;
+                        Instantiate(magnet, transform.position, Quaternion.identity);
+                        magnetcount++;
+                    }
+                    else
+                    {
+                        magnetSc.move.x = move.x;
+                        magnetSc.move.y = move.y;
+                    }
+
+                    canclick = false;
+                }
               }
           }
        
@@ -168,7 +233,7 @@ public class PlayerBehavior : MonoBehaviour
 
      public void Move()
       {
-        transform.Translate(move);
+        transform.Translate(move * Time.deltaTime * movespeed);
 
       }
     
