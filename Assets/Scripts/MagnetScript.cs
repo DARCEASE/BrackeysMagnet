@@ -13,8 +13,8 @@ public class MagnetScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType<PlayerBehavior>();
-        move.x = player.move.x;
-        move.y = player.move.y;
+        move.x = player.move.x * 2;
+        move.y = player.move.y * 2;
 
         metPLayer = false;
     }
