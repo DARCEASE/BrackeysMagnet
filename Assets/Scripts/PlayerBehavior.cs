@@ -90,21 +90,17 @@ public class PlayerBehavior : MonoBehaviour
                       move.x = .05f;
                       move.y = 0;
 
-                     // canmove = !canmove;
-                     
 
+                    // canmove = !canmove;
+
+                    magnetSc.ChangeMovement();
                     if (magnetcount < 1)
                     {
-                        magnetSc.move.x = move.x;
-                        magnetSc.move.y = move.y;
+                     
                         Instantiate(magnet, transform.position, Quaternion.identity);
                         magnetcount++;
                     }
-                    else
-                    {
-                        magnetSc.move.x = move.x;
-                        magnetSc.move.y = move.y;
-                    }
+                    
                     canclick = false;
                 }
 
