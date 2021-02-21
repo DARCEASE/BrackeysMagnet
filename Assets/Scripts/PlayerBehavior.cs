@@ -37,11 +37,16 @@ public class PlayerBehavior : MonoBehaviour
     //the bitch ass magnet
     public GameObject magnet;
     //to prevent more than 1 bitch ass magnet
-    private int magnetcount;
+    public int magnetcount;
 
     //the bitch ass magnet script
     public MagnetScript magnetSc;
     // Start is called before the first frame update
+
+    public int directionID;
+    //Identifies the direction
+    //0-up; 1-Right; 2-Down; 3-Left
+
     void Start()
     {
 
@@ -79,7 +84,7 @@ public class PlayerBehavior : MonoBehaviour
 
         if(magnet != null)
         {
-            Debug.Log("FOUND");
+            //Debug.Log("FOUND");
             magnetSc = magnet.GetComponent<MagnetScript>();
         }
 
@@ -106,18 +111,20 @@ public class PlayerBehavior : MonoBehaviour
               //there's empty space, so you can move
               if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
               {
+                
                   //move until u hit a wall IF you are not already moving
                   if (canclick)
                   {
+                    directionID = 1;
                     //set our speed to the right direction
-                      move.x = .05f;
+                    move.x = .05f;
                       move.y = 0;
 
 
                     // canmove = !canmove;
                     //magnetSc.gameObject.SetActive(false);
-                    Debug.Log("wtf");
-                    magnetSc.ChangeMovement();
+                    //Debug.Log("wtf");
+                    //magnetSc.ChangeMovement();
                     //magnetSc.speed = 5;
                     if (magnetcount < 1)
                     {
@@ -145,6 +152,7 @@ public class PlayerBehavior : MonoBehaviour
 
                   if (canclick)
                   {
+                    directionID = 3;
                       move.x = -.05f;
                       move.y = 0;
 
@@ -181,6 +189,7 @@ public class PlayerBehavior : MonoBehaviour
                   //move until u hit a wall
                   if (canclick)
                   {
+                    directionID = 0;
                       move.x = 0;
                       move.y = .05f;
 
@@ -219,6 +228,7 @@ public class PlayerBehavior : MonoBehaviour
                   //move until u hit a wall
                   if (canclick)
                   {
+                    directionID = 2;
                       move.x = 0;
                       move.y = -.05f;
 
@@ -266,6 +276,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (collision.gameObject.name == "wall")
         {
+            Debug.Log("wall hit");
            // rayCastHold.GetComponent<RaycastBehavior>().isMoving = false;
             //rayCastHold.SetActive(true);
             canmove = false;
