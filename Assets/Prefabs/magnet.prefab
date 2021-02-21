@@ -100,7 +100,8 @@ MonoBehaviour:
   move: {x: 0, y: 0.05, z: 0}
   metPLayer: 0
   walltouch: 0
-  speed: 250
+  speed: 150
+  tf: 17
 --- !u!61 &8598160202174245608
 BoxCollider2D:
   m_ObjectHideFlags: 0
