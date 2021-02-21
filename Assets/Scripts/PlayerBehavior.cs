@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -56,6 +57,17 @@ public class PlayerBehavior : MonoBehaviour
     public Animator ani;
     //animator
 
+    public GameObject youWinPanel;
+    //the you win panel
+
+    public TextMeshProUGUI countText;
+    //tracks how many moves you made
+
+    public TextMeshProUGUI finalCount;
+    //displays the final amount of moves you did when you win
+
+    public int moveCount;
+
     void Start()
     {
 
@@ -79,6 +91,7 @@ public class PlayerBehavior : MonoBehaviour
         rb.AddForce(dr);
         //BOOUNCE----------------
 
+        moveCount = 0;
 
         magnetcount = 0;
     }
@@ -126,15 +139,19 @@ public class PlayerBehavior : MonoBehaviour
           Debug.DrawLine(transform.position, u, Color.blue);
           Debug.DrawLine(transform.position, dwn, Color.yellow);
 
+        countText.text = moveCount.ToString();
+
           if (right.collider == null)
           {
               //there's empty space, so you can move
               if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
               {
-                
+                    
                   //move until u hit a wall IF you are not already moving
                   if (canclick)
                   {
+
+                    moveCount++;
                     isMoving = true;
                     if(playerID == 0)//throwing animation
                     {
@@ -183,6 +200,7 @@ public class PlayerBehavior : MonoBehaviour
 
                   if (canclick)
                   {
+                    moveCount++;
                     isMoving = true;
                     if (playerID == 0)//throwing animation
                     {
@@ -229,6 +247,7 @@ public class PlayerBehavior : MonoBehaviour
                   //move until u hit a wall
                   if (canclick)
                   {
+                    moveCount++;
                     isMoving = true;
                     if (playerID == 0)//throwing animation
                     {
@@ -247,16 +266,17 @@ public class PlayerBehavior : MonoBehaviour
 
                     if (magnetcount < 1)
                     {
+                       
+                        Instantiate(magnet, transform.position, Quaternion.identity);
                         magnetSc.move.x = move.x;
                         magnetSc.move.y = move.y;
-                        Instantiate(magnet, transform.position, Quaternion.identity);
                         magnetcount++;
                     }
-                    else
+                    /*else
                     {
                         magnetSc.move.x = move.x;
                         magnetSc.move.y = move.y;
-                    }
+                    }*/
 
                     canclick = false;
                 }
@@ -277,6 +297,7 @@ public class PlayerBehavior : MonoBehaviour
                   //move until u hit a wall
                   if (canclick)
                   {
+                    moveCount++;
                     isMoving = true;
                     if (playerID == 0)//throwing animation
                     {
@@ -354,8 +375,21 @@ public class PlayerBehavior : MonoBehaviour
             isbouncing = true;
             Invoke("StopBounce", 0.3f);
         }
+
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.tag == "Captive")
+        {
+            Debug.Log("YEAAAAAAAAAAAA");
+            finalCount.text = "You made " + moveCount + " move(s)!";
+            youWinPanel.SetActive(true); // open winning Panel that plays animation of the magnet boi and thier pal
+            ani.Play("Dance");
+            collision.GetComponent<Animator>().Play("Happy");
+        }
+    }
     void StopBounce()
     {
         isbouncing = false;
