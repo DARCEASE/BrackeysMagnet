@@ -1952,6 +1952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsPanel: {fileID: 68706795}
+  pauseMenuBM: {fileID: 101565838}
 --- !u!4 &623273046
 Transform:
   m_ObjectHideFlags: 0
