@@ -15,6 +15,8 @@ public class PlayerBehavior : MonoBehaviour
 
     //when the player can move...when the player can start to move....when the player bounces
     public bool canmove, canclick, isbouncing = false;
+    public bool isMoving;
+    //if the player is moving
 
     //base player speed
     public Vector2 move;
@@ -47,12 +49,20 @@ public class PlayerBehavior : MonoBehaviour
     //Identifies the direction
     //0-up; 1-Right; 2-Down; 3-Left
 
+    public int playerID;
+    //checks which magnet the player is at the moment
+    //0 - North|1 - South
+
+    public Animator ani;
+    //animator
+
     void Start()
     {
 
         
         //rayCastHold = GetComponentInChildren<RaycastBehavior>().gameObject; 
         col = GetComponent<CircleCollider2D>();
+        ani = GetComponent<Animator>();
         canclick = true;
         rb = GetComponent<Rigidbody2D>();
 
@@ -78,10 +88,20 @@ public class PlayerBehavior : MonoBehaviour
     {
         //if (rayCastHold.GetComponent<RaycastBehavior>().isMoving == true)
         //{
-         //   rayCastHold.SetActive(false);
+        //   rayCastHold.SetActive(false);
         //}
 
-
+        if (!isMoving)
+        {
+            if (playerID == 0)//idle animation
+            {
+                ani.Play("North_Idle");
+            }
+            else
+            {
+                ani.Play("South_Idle");
+            }
+        }
         if(magnet != null)
         {
             //Debug.Log("FOUND");
@@ -115,6 +135,17 @@ public class PlayerBehavior : MonoBehaviour
                   //move until u hit a wall IF you are not already moving
                   if (canclick)
                   {
+                    isMoving = true;
+                    if(playerID == 0)//throwing animation
+                    {
+                        ani.Play("North_Throw");
+                    }
+                    else
+                    {
+                        ani.Play("South_Throw");
+                    }
+
+
                     directionID = 1;
                     //set our speed to the right direction
                     move.x = .05f;
@@ -152,6 +183,15 @@ public class PlayerBehavior : MonoBehaviour
 
                   if (canclick)
                   {
+                    isMoving = true;
+                    if (playerID == 0)//throwing animation
+                    {
+                        ani.Play("North_Throw");
+                    }
+                    else
+                    {
+                        ani.Play("South_Throw");
+                    }
                     directionID = 3;
                       move.x = -.05f;
                       move.y = 0;
@@ -189,6 +229,15 @@ public class PlayerBehavior : MonoBehaviour
                   //move until u hit a wall
                   if (canclick)
                   {
+                    isMoving = true;
+                    if (playerID == 0)//throwing animation
+                    {
+                        ani.Play("North_Throw");
+                    }
+                    else
+                    {
+                        ani.Play("South_Throw");
+                    }
                     directionID = 0;
                       move.x = 0;
                       move.y = .05f;
@@ -228,6 +277,15 @@ public class PlayerBehavior : MonoBehaviour
                   //move until u hit a wall
                   if (canclick)
                   {
+                    isMoving = true;
+                    if (playerID == 0)//throwing animation
+                    {
+                        ani.Play("North_Throw");
+                    }
+                    else
+                    {
+                        ani.Play("South_Throw");
+                    }
                     directionID = 2;
                       move.x = 0;
                       move.y = -.05f;
@@ -269,15 +327,24 @@ public class PlayerBehavior : MonoBehaviour
      public void Move()
       {
         transform.Translate(move * Time.deltaTime * movespeed);
+        if (playerID == 0)//magnetizing animation
+        {
+            ani.Play("North_Spin");
+        }
+        else
+        {
+            ani.Play("South_Spin");
+        }
 
-      }
+    }
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "wall")
         {
             Debug.Log("wall hit");
-           // rayCastHold.GetComponent<RaycastBehavior>().isMoving = false;
+            isMoving = false;
+            // rayCastHold.GetComponent<RaycastBehavior>().isMoving = false;
             //rayCastHold.SetActive(true);
             canmove = false;
             canclick = true;

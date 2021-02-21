@@ -10,14 +10,17 @@ public class MagnetScript : MonoBehaviour
     public bool metPLayer, walltouch;
     public float speed;
 
-    public int tf, id;
+    public int tf, dirid, playerid;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindObjectOfType<PlayerBehavior>();
+        anim = GetComponent<Animator>();
         //move.x = player.move.x;
         //move.y = player.move.y;
-        id = player.directionID;
+        dirid = player.directionID;
+        playerid = player.playerID;
         metPLayer = false;
     }
 
@@ -33,7 +36,15 @@ public class MagnetScript : MonoBehaviour
 
         if(!walltouch)
         {
-            switch (id)
+            if (playerid == 1)//spinning animation
+            {
+                anim.Play("North_Spin");
+            }
+            else
+            {
+                anim.Play("South_Spin");
+            }
+            switch (dirid)
             {
                 case 0:
                     move = new Vector3(0, .2f, 0);
@@ -64,6 +75,15 @@ public class MagnetScript : MonoBehaviour
         {
             Debug.Log("destroyed magnet");
             player.magnetcount = 0;
+
+            if(playerid == 0)
+            {
+                player.playerID = 1;
+            }
+            else
+            {
+                player.playerID = 0;
+            }
             Destroy(gameObject);
         }
         
@@ -75,8 +95,17 @@ public class MagnetScript : MonoBehaviour
         Debug.Log("collision detected");
         if (collision.gameObject.name == "wall")
         {
+            if (playerid == 1)//hitting wall animation
+            {
+                anim.Play("North_Fall");
+            }
+            else
+            {
+                anim.Play("South_fall");
+            }
             walltouch = true;
             player.canmove = true;
+
             //Freeze();
             //walltouch = true;
             //player.canclick = true;
