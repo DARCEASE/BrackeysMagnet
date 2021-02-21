@@ -56,6 +56,9 @@ public class PlayerBehavior : MonoBehaviour
     public Animator ani;
     //animator
 
+    public GameObject youWinPanel;
+    //the you win panel
+
     void Start()
     {
 
@@ -247,16 +250,17 @@ public class PlayerBehavior : MonoBehaviour
 
                     if (magnetcount < 1)
                     {
+                       
+                        Instantiate(magnet, transform.position, Quaternion.identity);
                         magnetSc.move.x = move.x;
                         magnetSc.move.y = move.y;
-                        Instantiate(magnet, transform.position, Quaternion.identity);
                         magnetcount++;
                     }
-                    else
+                    /*else
                     {
                         magnetSc.move.x = move.x;
                         magnetSc.move.y = move.y;
-                    }
+                    }*/
 
                     canclick = false;
                 }
@@ -354,8 +358,20 @@ public class PlayerBehavior : MonoBehaviour
             isbouncing = true;
             Invoke("StopBounce", 0.3f);
         }
+
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.tag == "Captive")
+        {
+            Debug.Log("YEAAAAAAAAAAAA");
+            youWinPanel.SetActive(true); // open winning Panel that plays animation of the magnet boi and thier pal
+            ani.Play("Dance");
+            collision.GetComponent<Animator>().Play("Happy");
+        }
+    }
     void StopBounce()
     {
         isbouncing = false;
