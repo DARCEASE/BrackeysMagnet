@@ -7,24 +7,39 @@ public class PlayerBehavior : MonoBehaviour
     //public Transform lineStart, lineEnd;
    // public GameObject rayCastHold; //child GO W/ raycast script
     
+    //raycast directions
     private Vector3 rt, lt, dwn, u;
 
-    public int direction;
+    //raycast length
     public float range;
+
+    //when the player can move...when the player can start to move....when the player bounces
     public bool canmove, canclick, isbouncing = false;
+
+    //base player speed
     public Vector2 move;
+    //which is multiplied by a speed
     public float movespeed;
 
+    //our circle collider
     private Collider2D col;
+    //to detect anything with the wall mask
     public LayerMask wall;
 
+    //our rigidbody
     private Rigidbody2D rb;
+
+    //the direction we bounce in
     private Vector2 dr;
+    //how "far/fast" our bounce is
     private float speed;
 
+    //the bitch ass magnet
     public GameObject magnet;
+    //to prevent more than 1 bitch ass magnet
     private int magnetcount;
 
+    //the bitch ass magnet script
     public MagnetScript magnetSc;
     // Start is called before the first frame update
     void Start()
@@ -35,6 +50,8 @@ public class PlayerBehavior : MonoBehaviour
         col = GetComponent<CircleCollider2D>();
         canclick = true;
         rb = GetComponent<Rigidbody2D>();
+
+        //BOOUNCE--------------
         float rads = 0;
         while (rads == 0)
         {
@@ -45,6 +62,8 @@ public class PlayerBehavior : MonoBehaviour
         dr.Normalize();
         dr *= speed;
         rb.AddForce(dr);
+        //BOOUNCE----------------
+
 
         magnetcount = 0;
     }
@@ -56,22 +75,27 @@ public class PlayerBehavior : MonoBehaviour
         //{
          //   rayCastHold.SetActive(false);
         //}
+
+
         if(magnet != null)
         {
+            Debug.Log("FOUND");
             magnetSc = magnet.GetComponent<MagnetScript>();
         }
 
+        //RAYCAST BEHAVIOR
           rt = new Vector3(transform.position.x + range, transform.position.y, 0);
           lt = new Vector3(transform.position.x - range, transform.position.y, 0);
           dwn = new Vector3(transform.position.x, transform.position.y - range, 0);
           u = new Vector3(transform.position.x, transform.position.y + range, 0);
 
+        //RAYCAST DETECTION
           RaycastHit2D right = Physics2D.Linecast(transform.position, rt, wall);
           RaycastHit2D left = Physics2D.Linecast(transform.position, lt, wall);
           RaycastHit2D up = Physics2D.Linecast(transform.position, u, wall);
           RaycastHit2D down = Physics2D.Linecast(transform.position, dwn, wall);
 
-        
+        //SHOW RAYCAST
           Debug.DrawLine(transform.position, rt, Color.red);
           Debug.DrawLine(transform.position, lt, Color.green);
           Debug.DrawLine(transform.position, u, Color.blue);
@@ -79,21 +103,22 @@ public class PlayerBehavior : MonoBehaviour
 
           if (right.collider == null)
           {
-              //Debug.Log("em");
               //there's empty space, so you can move
               if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
               {
-                  //Debug.Log("Right is Open. pretend i moved");
-                  //move until u hit a wall
+                  //move until u hit a wall IF you are not already moving
                   if (canclick)
                   {
+                    //set our speed to the right direction
                       move.x = .05f;
                       move.y = 0;
 
 
                     // canmove = !canmove;
-
+                    //magnetSc.gameObject.SetActive(false);
+                    Debug.Log("wtf");
                     magnetSc.ChangeMovement();
+                    //magnetSc.speed = 5;
                     if (magnetcount < 1)
                     {
                      
@@ -102,7 +127,7 @@ public class PlayerBehavior : MonoBehaviour
                     }
                     
                     canclick = false;
-                }
+                    }
 
                 
               }
