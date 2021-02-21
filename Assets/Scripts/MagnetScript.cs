@@ -47,19 +47,19 @@ public class MagnetScript : MonoBehaviour
             switch (dirid)
             {
                 case 0:
-                    move = new Vector3(0, .2f, 0);
+                    move = new Vector3(0, .08f, 0);
                     Debug.Log("up");
                     break;
                 case 1:
-                    move = new Vector3(.2f, 0, 0);
+                    move = new Vector3(.08f, 0, 0);
                     Debug.Log("right");
                     break;
                 case 2:
-                    move = new Vector3(0, -.2f, 0);
+                    move = new Vector3(0, -.08f, 0);
                     Debug.Log("down");
                     break;
                 case 3:
-                    move = new Vector3(-.2f, 0, 0);
+                    move = new Vector3(-.08f, 0, 0);
                     Debug.Log("left");
                     break;
             }

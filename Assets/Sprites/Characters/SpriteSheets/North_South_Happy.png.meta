@@ -1,25 +1,31 @@
 fileFormatVersion: 2
-guid: cccfc64351af7444aa0449579d4fa0d7
+guid: a50389992115003488daf6b57d11445e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3978399927464399316
-    second: Rubin SpriteSheet_0
+      213: 2847302147929731418
+    second: North_South_Happy_0
   - first:
-      213: -9145116336077698902
-    second: Rubin SpriteSheet_1
+      213: 6337585751692100306
+    second: North_South_Happy_1
   - first:
-      213: -1493975087956916889
-    second: Rubin SpriteSheet_2
+      213: -3836350345632274420
+    second: North_South_Happy_2
   - first:
-      213: 384915768165472197
-    second: Rubin SpriteSheet_3
+      213: -889229222302273139
+    second: North_South_Happy_3
   - first:
-      213: -5241228640886919955
-    second: Rubin SpriteSheet_4
+      213: 2069265182501644407
+    second: North_South_Happy_4
   - first:
-      213: -304566670231109081
-    second: Rubin SpriteSheet_5
+      213: -4990723521466900311
+    second: North_South_Happy_5
+  - first:
+      213: -5744055475743466982
+    second: North_South_Happy_6
+  - first:
+      213: -6582921338857192101
+    second: North_South_Happy_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -49,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -63,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -102,7 +108,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -114,7 +120,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -129,13 +135,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rubin SpriteSheet_0
+      name: North_South_Happy_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 110
-        width: 110
-        height: 110
+        x: 10
+        y: 789
+        width: 90
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2e6b0d2852e9c8c0800000000000000
-      internalID: -3978399927464399316
+      spriteID: a51fe87c736a38720800000000000000
+      internalID: 2847302147929731418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rubin SpriteSheet_1
+      name: North_South_Happy_1
       rect:
         serializedVersion: 2
-        x: 110
-        y: 110
-        width: 110
-        height: 110
+        x: 19
+        y: 681
+        width: 72
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +170,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa8877e2525061180800000000000000
-      internalID: -9145116336077698902
+      spriteID: 2d24f27c9a0a3f750800000000000000
+      internalID: 6337585751692100306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rubin SpriteSheet_2
+      name: North_South_Happy_2
       rect:
         serializedVersion: 2
-        x: 220
-        y: 110
-        width: 110
-        height: 110
+        x: 24
+        y: 567
+        width: 66
+        height: 67
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7658b0ba295544be0800000000000000
-      internalID: -1493975087956916889
+      spriteID: c0824aebfab82cac0800000000000000
+      internalID: -3836350345632274420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rubin SpriteSheet_3
+      name: North_South_Happy_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 110
-        height: 110
+        x: 16
+        y: 459
+        width: 80
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,20 +212,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c713fd0ade775500800000000000000
-      internalID: 384915768165472197
+      spriteID: d81b6c0dbb2d8a3f0800000000000000
+      internalID: -889229222302273139
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rubin SpriteSheet_4
+      name: North_South_Happy_4
       rect:
         serializedVersion: 2
-        x: 110
-        y: 0
-        width: 110
-        height: 110
+        x: 10
+        y: 349
+        width: 90
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +233,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dece451025a6347b0800000000000000
-      internalID: -5241228640886919955
+      spriteID: 778281558b187bc10800000000000000
+      internalID: 2069265182501644407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rubin SpriteSheet_5
+      name: North_South_Happy_5
       rect:
         serializedVersion: 2
-        x: 220
-        y: 0
-        width: 110
-        height: 110
+        x: 19
+        y: 241
+        width: 72
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,8 +254,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72283722a36f5cbf0800000000000000
-      internalID: -304566670231109081
+      spriteID: 9a067c236636dbab0800000000000000
+      internalID: -4990723521466900311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: North_South_Happy_6
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 127
+        width: 66
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1a5c266af30940b0800000000000000
+      internalID: -5744055475743466982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: North_South_Happy_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 19
+        width: 80
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b55041d8be3c4a4a0800000000000000
+      internalID: -6582921338857192101
       vertices: []
       indices: 
       edges: []

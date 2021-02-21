@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8598160202174245613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.44, y: -3.15, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.23148966}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.23148966}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,12 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  move: {x: 0, y: 0.05, z: 0}
+  move: {x: 0, y: -0.05, z: 0}
   metPLayer: 0
   walltouch: 0
   speed: 100
   tf: 17
-  id: 0
+  dirid: 0
+  playerid: 0
+  anim: {fileID: 0}
 --- !u!61 &8598160202174245608
 BoxCollider2D:
   m_ObjectHideFlags: 0
